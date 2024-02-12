@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="helloWorld">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-</head>
-<body>
+	<title>Hello World</title>
+	<script src="angular.js"></script>
+	<script>
+		angular.module("helloWorld", []);
+		angular.module("helloWorld").controller("helloWorldCtrl", function($scope){
+			$scope.message = "Hello World";
+		});
 
+	</script>
+
+</head>
+<body >
+	<div ng-controller="helloWorldCtrl">
+		{{message}}
+	</div>
 </body>
 </html>
