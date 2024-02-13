@@ -22,6 +22,14 @@
 			.form-control{
 				margin-bottom: 5px;
 			}
+
+			.selecionado{
+				background-color: yellow;
+			}
+
+			.negrito{
+				font-weight: bold;
+			}
 		</style>
 
 		<script src="lib/angular/angular.js"></script>
@@ -34,15 +42,18 @@
 				$scope.contatos = [
 					{
 						nome: "Maria",
-						telefone: "42912345678"
+						telefone: "42912345678",
+						cor: "yellow"
 					},
 					{
 						nome: "Joao",
-						telefone: "42987654321"
+						telefone: "42987654321",
+						cor: "blue"
 					},
 					{
 						nome: "Pedro",
-						telefone: "42912348765"
+						telefone: "42912348765",
+						cor: "green"
 					}
 				];
 
@@ -75,12 +86,33 @@
 
 				];
 
-				$scope.adicionarContato = function(contato){
+				$scope.adicionarContato = function (contato) {
 					//console.log($scope.nome);
 					//console.log($scope.telefone);
 					$scope.contatos.push(angular.copy(contato));
 					delete $scope.contato;
 				};
+
+				$scope.apagarContatos = function (contatos) {
+					//console.log(contatos);
+					$scope.contatos = contatos.filter (function (contato) {
+						if (!contato.selecionado) return contato;
+					});
+
+					//console.log(contatosSelecionados);
+				};
+
+				$scope.isContatoSelecionados = function (contatos) {
+					//console.log(contatos);
+					//Verifica se há algum valor do objeto selecionado
+					return contatos.some( function(contato){
+						return contato.selecionado;
+					});
+				};
+
+				//Aplicando estiles com NgClass
+				$scope.classe1 = "selecionado";
+				$scope.classe2 = "negrito";
 			});
 
 		</script>
@@ -91,16 +123,24 @@
 
 			<h4>{{app}}</h4>
 
-			<table class="table table-striped">
+			<table class="table">
 				<tr>
+					<th></th>
 					<th>Nome</th>
 					<th>Telefone</th>
 					<th>Operadora</th>
+					<th></th>
 				</tr>
-				<tr ng-repeat="contato in contatos">
+				<!-- Aplicando estilos com NgClass -->
+				<!--tr ng-class="[classe1, classe2]" ng-repeat="contato in contatos"-->
+				<tr ng-class="{'selecionado negrito': contato.selecionado}"  ng-repeat="contato in contatos">
+					<td><input type="checkbox" ng-model="contato.selecionado"/></td>
 					<td>{{contato.nome}}</td>
 					<td>{{contato.telefone}}</td>
 					<td>{{contato.operadora.nome}}</td>
+					<td>
+						<!-- NgStyle --> 
+						<div style="width: 25px; height: 25px;" ng-style="{'background-color': contato.cor}"> </div> </td>
 				</tr>
 			</table>
 			<hr/>
@@ -117,6 +157,7 @@
 
 			<!-- NgClick atribuindo comportamento ao evento -->
 			<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
+			<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-disabled="!isContatoSelecionados(contatos)">Apagar Contatos</button>
 
 			</table>
 		</div>
