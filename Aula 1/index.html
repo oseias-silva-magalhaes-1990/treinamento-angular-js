@@ -14,6 +14,14 @@
 				margin-left: auto;
 				margin-right: auto;
 			}
+
+			.table{
+				margin-top: 20px;
+			}
+
+			.form-control{
+				margin-bottom: 5px;
+			}
 		</style>
 
 		<script src="lib/angular/angular.js"></script>
@@ -37,6 +45,13 @@
 						telefone: "42912348765"
 					}
 				];
+
+				$scope.adicionarContato = function(contato){
+					//console.log($scope.nome);
+					//console.log($scope.telefone);
+					$scope.contatos.push(angular.copy(contato));
+					delete $scope.contato;
+				};
 			});
 
 		</script>
@@ -44,8 +59,13 @@
 	</head>
 	<body ng-controller="listaTelefonicaCtrl">
 		<div class="jumbotron">
-			<!--<h3 ng-bind="app"></h3> Usando NG Bind-->
+
+			<!-- Usando NG Bind para declaração de valores
+			<h3 ng-bind="app"></h3> Usando NG Bind
+			-->
+
 			<h4>{{app}}</h4>
+
 			<table class="table table-striped">
 				<tr>
 					<th>Nome</th>
@@ -55,6 +75,29 @@
 					<td>{{contato.nome}}</td>
 					<td>{{contato.telefone}}</td>
 				</tr>
+			</table>
+			<hr/>
+
+			<!-- NgModel vincula uma propriedade ao scope -->
+			<input class="form-control" type="name" ng-model="contato.nome" placeholder="Nome" />
+			<input class="form-control" type="telefone" ng-model="contato.telefone" placeholder="Telefone" />
+
+			<!-- NgClick atribuindo comportamento ao evento -->
+			<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)">Adicionar Contato</button>
+
+			<!-- Criando Tabela Utilizando Laço
+			<table class="table table-striped">
+				<tr>
+					<th>Nome</th>
+					<th>Telefone</th>
+				</tr>
+			
+				<tr ng-repeat="contato in contatos">
+					<td ng-repeat="(key, value) in contato">{{value}}</td>
+				</tr>
+			-->
+
+
 			</table>
 		</div>
 	</body>
