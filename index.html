@@ -1,21 +1,61 @@
 <!DOCTYPE html>
-<html ng-app="helloWorld">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Hello World</title>
-	<script src="angular.js"></script>
-	<script>
-		angular.module("helloWorld", []);
-		angular.module("helloWorld").controller("helloWorldCtrl", function($scope){
-			$scope.message = "Hello World";
-		});
-	</script>
+<html ng-app="listaTelefonica">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Lista Telefônica</title>
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css"/>
 
-</head>
-<body >
-	<div ng-controller="helloWorldCtrl">
-		{{message}}
-	</div>
-</body>
+		<style>
+			.jumbotron{
+				width: 400px;
+				text-align: center;
+				margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+
+		<script src="lib/angular/angular.js"></script>
+		<script>
+			
+			angular.module("listaTelefonica", []);
+
+			angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope){
+				$scope.app = "Lista Telefônica";
+				$scope.contatos = [
+					{
+						nome: "Maria",
+						telefone: "42912345678"
+					},
+					{
+						nome: "Joao",
+						telefone: "42987654321"
+					},
+					{
+						nome: "Pedro",
+						telefone: "42912348765"
+					}
+				];
+			});
+
+		</script>
+
+	</head>
+	<body ng-controller="listaTelefonicaCtrl">
+		<div class="jumbotron">
+			<!--<h3 ng-bind="app"></h3> Usando NG Bind-->
+			<h4>{{app}}</h4>
+			<table class="table table-striped">
+				<tr>
+					<th>Nome</th>
+					<th>Telefone</th>
+				</tr>
+				<tr ng-repeat="contato in contatos">
+					<td>{{contato.nome}}</td>
+					<td>{{contato.telefone}}</td>
+				</tr>
+			</table>
+		</div>
+	</body>
 </html>
