@@ -123,7 +123,7 @@
 
 			<h4>{{app}}</h4>
 
-			<table class="table">
+			<table class="table" ng-show="contatos.length > 0">
 				<tr>
 					<th></th>
 					<th>Nome</th>
@@ -145,7 +145,6 @@
 			</table>
 			<hr/>
 
-			{{contato}}
 			<!-- NgModel vincula uma propriedade ao scope -->
 			<input class="form-control" type="name" ng-model="contato.nome" placeholder="Nome" />
 			<input class="form-control" type="telefone" ng-model="contato.telefone" placeholder="Telefone" />
@@ -156,10 +155,21 @@
 			</select>
 
 			<!-- NgClick atribuindo comportamento ao evento -->
-			<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
-			<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-disabled="!isContatoSelecionados(contatos)">Apagar Contatos</button>
+			<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.operadora">Adicionar Contato</button>
 
+			<!-- Uso do NgShow, ng Hide, NgIf -->
+
+			<!-- button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-show="isContatoSelecionados(contatos)">Apagar Contatos</button -->
+			<!--button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-hide="!isContatoSelecionados(contatos)">Apagar Contatos</button-->
+			<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-if="isContatoSelecionados(contatos)">Apagar Contatos</button>
 			</table>
 		</div>
+
+		<!-- Não funcionou no Chrome nem no Firefox -->
+		<!-- ng-include src="'footer.html'"></ng-include -->
+		<div style="text-align: center; padding-bottom: 20px">
+			Criado por Oséias Magalhães
+		</div>
+
 	</body>
 </html>
