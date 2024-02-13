@@ -164,7 +164,7 @@
 				<!-- Aplicando estilos com NgClass -->
 				<!--tr ng-class="[classe1, classe2]" ng-repeat="contato in contatos"-->
 				<!-- tr ng-class="{'selecionado negrito': contato.selecionado}"  ng-repeat="contato in contatos | filter:{nome: criterioDeBusca}"-->
-				<tr ng-class="{'selecionado negrito': contato.selecionado}"  ng-repeat="contato in contatos | limitTo:2 | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDeOrdenacao">
+				<tr ng-class="{'selecionado negrito': contato.selecionado}"  ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDeOrdenacao">
 					<td><input type="checkbox" ng-model="contato.selecionado"/></td>
 					<td>{{contato.nome | uppercase}}</td>
 					<td>{{contato.telefone}}</td>
